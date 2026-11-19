@@ -125,6 +125,12 @@ class GeminiClient:
     async def translate(self, text: str) -> str:
         return await self.ask(TRANSLATE_PROMPT + text)
 
+    async def market_listings_text(self, page_text: str) -> str:
+        """TinyFish o'qigan Uzum qidiruv sahifasi matnidan JSON ro'yxat."""
+        prompt = (MARKET_PROMPT.replace("skrinshoti", "matni").replace("Rasmda", "Matnda")
+                  + "\n\nSahifa matni:\n" + (page_text or "")[:30000])
+        return await self.ask(prompt)
+
     async def market_listings(self, image: bytes) -> str:
         return await self.ask(MARKET_PROMPT, image=image)
 

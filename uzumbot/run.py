@@ -15,6 +15,7 @@ from bot.cargo_import import import_cargos
 from bot.config import load_config
 from bot.db import Database
 from bot.gemini import GeminiClient
+from bot.tinyfish import TinyFishClient
 from bot.handlers import all_routers
 from bot.heartbeat import heartbeat_loop
 from bot.keyboards import WEBAPP, main_menu
@@ -51,6 +52,7 @@ async def main() -> None:
     dp = Dispatcher(storage=MemoryStorage())
     dp["db"] = db
     dp["gemini"] = gemini
+    dp["tinyfish"] = TinyFishClient(cfg.tinyfish_api_key)
 
     dp.message.outer_middleware(AccessMiddleware())
     dp.callback_query.outer_middleware(AccessMiddleware())
@@ -62,6 +64,7 @@ async def main() -> None:
         BotCommand(command="app", description="Ilovani ochish"),
         BotCommand(command="cancel", description="Bekor qilish"),
         BotCommand(command="backup", description="Zaxira nusxa"),
+        BotCommand(command="baho", description="Taobao linki -> tezkor baho"),
         BotCommand(command="bozor", description="Uzum bozor tahlili (skrinshotlar)"),
         BotCommand(command="tariflar", description="Uzum tariflarini yangilash"),
         BotCommand(command="import_kargo", description="Kargolarni cargos.json dan yangilash"),

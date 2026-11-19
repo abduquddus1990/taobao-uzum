@@ -21,6 +21,7 @@ class Config:
     webapp_url: str = ""            # qat'iy manzil (masalan, o'z domeningiz). Bo'sh — tunnel
     tunnel: str = "cloudflared"     # cloudflared / none
     backup_hour: int = 23
+    tinyfish_api_key: str = ""      # Uzum sahifalarini o'qish (TinyFish Fetch, bepul)
 
     @property
     def owner_id(self) -> int:
@@ -61,4 +62,5 @@ def load_config() -> Config:
         webapp_url=os.getenv("WEBAPP_URL", "").strip().rstrip("/"),
         tunnel=os.getenv("TUNNEL", "cloudflared").strip().lower(),
         backup_hour=int(os.getenv("BACKUP_HOUR", "23")),
+        tinyfish_api_key=os.getenv("TINYFISH_API_KEY", "").strip(),
     )

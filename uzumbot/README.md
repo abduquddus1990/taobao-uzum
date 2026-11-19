@@ -1,7 +1,8 @@
-# Uzum–Taobao yordamchi bot — 1.6-bosqich
+# Uzum–Taobao yordamchi bot — 1.7-bosqich
 
 Bot quyidagilarni qiladi:
 
+- **🔗 Tezkor baho (link → narx).** Botga Taobao/1688/Pinduoduo linkini narx va vazn bilan yuboring: `LINK 15 250` (¥15, 250 g). Bot ¥ → $ → so'm, eng yaxshi kargo (top-3), tannarx, Uzum to'lovlari, zararsizlik narxi, **minimal narx (maqsadli marja)** va …900 ga yaxlitlangan **tavsiya narx**ni chiqaradi. «💾 Saqlash» — tovarlarimga, «📊 Uzum narxlari» — raqobatchilar tahlili (TinyFish).
 - **📱 Mini ilova.** Hammasi bitta chiroyli oynada: jonli kalkulyator, tovarlar, kargolar, AI, sozlamalar. Chap pastdagi «📱 Ilova» tugmasi orqali ochiladi.
 - **Tannarx hisoblash — Uzum rasmiy tariflari bilan.** Komissiya 5 084 toifali rasmiy jadvaldan (FBO/FBS), logistika qadoq hajmi (litr) bo'yicha, FBO saqlash, aylanma solig'i 1%, ekvayring komissiya ichida. Xitoy tomoni: narx, konvertatsiya, bayer, ichki yetkazish, kargo (haqiqiy / hajmiy vazn / $ m³ — qaysi biri qimmat), qadoq, qatnovlar. Natija: zararsizlik narxi, maqsadli narx, ROI va xulosa: 🟢 KIRAMIZ, 🟡 EHTIYOT yoki 🔴 KIRMAYMIZ.
 - **Kargo taklifi.** Har bir partiya uchun barcha kargolar bilan hisoblab, eng yaxshisini taklif qiladi: 🏆 tavsiya (narx 50% + tezlik 20% + sifat 15% + "oq" hujjat 10% + Olmaliq 5%), 💰 eng arzon, ⚡ eng tez, ⭐ ishonchli (siz 4★+ baholagan), 📄 oq hujjat, 📍 Olmaliq. Mos kelmaganlar sababi bilan alohida: partiya (3+ dona) olmaydigan (masalan, MK Express avia), minimal vazndan kam (MK 100 kg+, Sellmate ekspress 200 kg), tarifi kiritilmagan. Muddat qo'llanma bo'yicha +4 kun zaxira bilan ("real ~").
@@ -88,6 +89,27 @@ Gulim botga birinchi marta `/start` yozishi kerak — shundan keyin unga ham xab
 
 Bepul tarifdagi so'rovlarni Google o'z modellarini yaxshilash uchun ishlatishi mumkin — AI'ga maxfiy ma'lumot yubormang.
 
+## 6a. Tezkor baho va Uzum raqobatchilari (TinyFish)
+
+**Link yuborish formati** (tartib muhim emas):
+
+```
+https://item.taobao.com/item.htm?id=... 15 250
+https://m.tb.cn/h.xxxx ¥15 250g 18x6x6 50ta #soyabon Mini zont
+```
+
+- `15` yoki `¥15` — 1 dona narxi (yuan), `250` yoki `250g` / `0.25kg` — 1 dona vazni (qadoq bilan).
+- `18x6x6` — qadoq o'lchami (sm): hajmiy vazn va Uzum logistikasi aniqroq bo'ladi.
+- `50ta` — partiya (yozilmasa 20 dona). `#soyabon` — Uzum toifasi (komissiya shu bo'yicha).
+- Qolgan so'zlar — tovar nomi. Taobao ilovasidan "Ulashish" matnini to'g'ridan-to'g'ri yuborsangiz ham bo'ladi: bot narx va vaznni so'raydi.
+
+**Uzum narxlari (bepul):**
+1. https://agent.tinyfish.ai da ro'yxatdan o'ting → API Keys → kalit yarating.
+2. `.env` ga `TINYFISH_API_KEY=...` yozing, botni qayta ishga tushiring.
+3. Baho ostidagi «📊 Uzum narxlari» → qidiruv so'zi (masalan: `mini zont`).
+
+TinyFish Fetch bepul: kuniga 1 000 ta, daqiqasiga 150 ta sahifa. Sahifadagi narxlarni Gemini ajratadi, shuning uchun Gemini kaliti ham kerak. Kalitni hech kimga bermang, GitHub'ga yuklamang.
+
 ## 7. Elektr o'chganda xabar (healthchecks.io)
 
 1. https://healthchecks.io → **Add Check**: Period 5 daqiqa, Grace 5 daqiqa.
@@ -170,6 +192,6 @@ uzumbot/
 ## Keyingi bosqichlar
 
 2. Xarid moduli (davomi): sotuvchilar, namunalar natijasi, trek raqamlari, kargo kechikishi signali.
-3. Raqobatchi monitoringi, Uzum Seller API: qoldiq kam, pul tushdi signallari.
+3. Raqobatchi monitoringi (TinyFish bilan haftalik avtomatik tekshiruv), Uzum Seller API: qoldiq kam, pul tushdi signallari.
 4. Foto studiya: fonni olib tashlash va shablon fonlar.
 5. Instagram/Telegram kontent rejasi.
