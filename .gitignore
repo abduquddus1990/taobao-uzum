@@ -1,0 +1,10 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+uzumbot/data/
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+*.log
