@@ -11,6 +11,9 @@ from ..render import split_text
 router = Router(name="ai")
 
 
+from ..quote import LINK_RE, parse_request
+
+
 class AiTask(StatesGroup):
     translate = State()
     card = State()
@@ -86,10 +89,17 @@ async def do_translate_photo(message: Message, state: FSMContext, gemini) -> Non
 
 
 @router.message(AiTask.translate)
-async def do_translate(message: Message, state: FSMContext, gemini) -> None:
+async def do_translate(message: Message, state: FSMContext, gemini, db) -> None:
     text = message.text or message.caption or ""
     if not text.strip():
         await message.answer("Xitoycha matn yoki skrinshot yuboring.")
+        return
+    if LINK_RE.search(text):
+        # Taobao/1688 linki (ulashish matni bilan ham) — bu tarjima emas, tezkor baho
+        from .quote import _handle
+        await state.clear()
+        await message.answer("🔗 Link keldi — bu tarjima emas, <b>tezkor baho</b> bo'limiga o'tkazdim.")
+        await _handle(message, state, db, parse_request(text))
         return
     if ("http" in text or "tb.cn" in text) and not _has_cjk_body(text):
         await message.answer(LINK_ONLY_HELP)

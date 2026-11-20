@@ -1,7 +1,9 @@
-# Uzum–Taobao yordamchi bot — 1.7-bosqich
+# Uzum–Taobao yordamchi bot — 1.8-bosqich
 
 Bot quyidagilarni qiladi:
 
+- **📸 Foto studiya.** Taobao rasmini yuboring — fonni olib tashlab (rembg, bepul, kompyuterda), oq fonli 3:4 (1080×1440) Uzum kartochkasi va shaffof PNG qaytaradi.
+- **💱 Kurs avtomatik.** Har kuni 09:15 da va ishga tushganda Markaziy bankdan ¥ va $ kursi olinadi (1%+ o'zgarsa xabar). Qo'lda: `/kurs`. O'chirish: Sozlamalar → «Kursni Markaziy bankdan...» = 0.
 - **🔗 Tezkor baho (link → narx).** Botga Taobao/1688/Pinduoduo linkini narx va vazn bilan yuboring: `LINK 15 250` (¥15, 250 g). Bot ¥ → $ → so'm, eng yaxshi kargo (top-3), tannarx, Uzum to'lovlari, zararsizlik narxi, **minimal narx (maqsadli marja)** va …900 ga yaxlitlangan **tavsiya narx**ni chiqaradi. «💾 Saqlash» — tovarlarimga, «📊 Uzum narxlari» — raqobatchilar tahlili (TinyFish).
 - **📱 Mini ilova.** Hammasi bitta chiroyli oynada: jonli kalkulyator, tovarlar, kargolar, AI, sozlamalar. Chap pastdagi «📱 Ilova» tugmasi orqali ochiladi.
 - **Tannarx hisoblash — Uzum rasmiy tariflari bilan.** Komissiya 5 084 toifali rasmiy jadvaldan (FBO/FBS), logistika qadoq hajmi (litr) bo'yicha, FBO saqlash, aylanma solig'i 1%, ekvayring komissiya ichida. Xitoy tomoni: narx, konvertatsiya, bayer, ichki yetkazish, kargo (haqiqiy / hajmiy vazn / $ m³ — qaysi biri qimmat), qadoq, qatnovlar. Natija: zararsizlik narxi, maqsadli narx, ROI va xulosa: 🟢 KIRAMIZ, 🟡 EHTIYOT yoki 🔴 KIRMAYMIZ.
@@ -109,6 +111,16 @@ https://m.tb.cn/h.xxxx ¥15 250g 18x6x6 50ta #soyabon Mini zont
 3. Baho ostidagi «📊 Uzum narxlari» → qidiruv so'zi (masalan: `mini zont`).
 
 TinyFish Fetch bepul: kuniga 1 000 ta, daqiqasiga 150 ta sahifa. Sahifadagi narxlarni Gemini ajratadi, shuning uchun Gemini kaliti ham kerak. Kalitni hech kimga bermang, GitHub'ga yuklamang.
+
+## 6b. Foto studiya (rembg)
+
+```
+pip install "rembg[cpu]"
+```
+
+Birinchi rasmda model (~180 MB) bir marta yuklanadi, keyin internet kerak emas. Bitta rasm 3–10 soniya.
+rembg o'rnatilmasa ham bo'lim ishlaydi — faqat fonni olmaydi. Boshqa model: `.env` ga `REMBG_MODEL=u2net`.
+Maslahat: rasmni **fayl** qilib yuboring (📎 → Fayl) — oddiy rasm Telegramda siqiladi.
 
 ## 7. Elektr o'chganda xabar (healthchecks.io)
 

@@ -2,3 +2,6 @@ aiogram>=3.13,<4
 aiosqlite>=0.20
 python-dotenv>=1.0
 google-genai>=1.0
+pillow>=10
+# 📸 Foto studiya (fonni olib tashlash) — ixtiyoriy, ~170 MB model bilan:
+# rembg[cpu]>=2.0.60

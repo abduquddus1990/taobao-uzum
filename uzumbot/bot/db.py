@@ -28,6 +28,7 @@ SETTINGS: dict[str, tuple[str, float, str]] = {
     "sell_days": ("Partiya sotilish muddati (taxmin)", 45, "kun"),
     "target_margin_pct": ("Maqsadli sof marja", 20, "%"),
     "budget_usd": ("Boshlang'ich byudjet", 1000, "$"),
+    "auto_rates": ("Kursni Markaziy bankdan har kuni olish (1 = ha, 0 = yo'q)", 1, ""),
 }
 
 # Sozlamadan to'g'ridan-to'g'ri CalcInput'ga o'tadigan maydonlar.

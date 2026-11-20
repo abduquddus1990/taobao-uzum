@@ -202,6 +202,29 @@ class QuoteFlowTest(unittest.IsolatedAsyncioTestCase):
         self.assertIn("30 dona", report)
         self.assertIn("Mini zont", report)
 
+    async def test_link_inside_translate_goes_to_quote(self):
+        await self.cb("ch:ai:tr")
+        await self.msg("【淘宝】7天无理由退货 https://m.tb.cn/h.TU4iKGX 「迷你折叠伞防晒防紫外线超轻便携」 点击链接直接打开")
+        self.assertIn("tezkor baho", texts(self.session)[-2])
+        self.assertIn("Yetishmaydi", texts(self.session)[-1])
+        await self.msg("15 250")
+        self.assertTrue(any("Tavsiya narx" in t for t in texts(self.session)))
+
+    async def test_photo_button_and_kurs(self):
+        await self.msg("📸 Foto studiya")
+        self.assertIn("Foto studiya", texts(self.session)[-1])
+        await self.msg("salom")
+        self.assertIn("Rasm yoki rasm-fayl", texts(self.session)[-1])
+        await self.msg("❌ Bekor qilish")
+
+        async def fake():
+            return {"CNY": 1690.5, "USD": 12040.0}
+        from unittest import mock
+        with mock.patch("bot.rates.fetch_cbu", fake):
+            await self.msg("/kurs")
+        self.assertIn("1 ¥ = 1 690.50 so'm", texts(self.session)[-1])
+        self.assertEqual((await self.db.get_settings())["cny_rate"], 1690.5)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -20,6 +20,7 @@ from bot.handlers import all_routers
 from bot.heartbeat import heartbeat_loop
 from bot.keyboards import WEBAPP, main_menu
 from bot.middlewares import AccessMiddleware
+from bot.rates import rates_loop
 from bot.tunnel import QuickTunnel
 from bot.uzum_tariffs import TARIFFS, refresh_loop
 from bot.webapp import create_app, start_server
@@ -65,6 +66,8 @@ async def main() -> None:
         BotCommand(command="cancel", description="Bekor qilish"),
         BotCommand(command="backup", description="Zaxira nusxa"),
         BotCommand(command="baho", description="Taobao linki -> tezkor baho"),
+        BotCommand(command="foto", description="Foto studiya: fonni olib tashlash"),
+        BotCommand(command="kurs", description="Markaziy bank kursini yangilash"),
         BotCommand(command="bozor", description="Uzum bozor tahlili (skrinshotlar)"),
         BotCommand(command="tariflar", description="Uzum tariflarini yangilash"),
         BotCommand(command="import_kargo", description="Kargolarni cargos.json dan yangilash"),
@@ -99,6 +102,7 @@ async def main() -> None:
         asyncio.create_task(heartbeat_loop(cfg.healthcheck_url, cfg.heartbeat_seconds)),
         asyncio.create_task(backup_loop(bot, db, [cfg.owner_id], cfg.backup_hour)),
         asyncio.create_task(refresh_loop(bot, db, list(cfg.admins))),
+        asyncio.create_task(rates_loop(bot, db, list(cfg.admins))),
     ]
 
     app_note = "📱 Ilova tayyor — chap pastdagi «Ilova» tugmasi." if WEBAPP["url"] else \

@@ -14,6 +14,7 @@ BTN_CARGOS = "🚚 Kargolar"
 BTN_SETTINGS = "⚙️ Sozlamalar"
 BTN_AI = "🤖 AI yordamchi"
 BTN_APP = "📱 Ilova"
+BTN_PHOTO = "📸 Foto studiya"
 BTN_CANCEL = "❌ Bekor qilish"
 
 
@@ -22,7 +23,8 @@ def main_menu() -> ReplyKeyboardMarkup:
         keyboard=[
             [KeyboardButton(text=BTN_CALC), KeyboardButton(text=BTN_PRODUCTS)],
             [KeyboardButton(text=BTN_CARGOS), KeyboardButton(text=BTN_SETTINGS)],
-            [KeyboardButton(text=BTN_AI), KeyboardButton(text=BTN_APP)],
+            [KeyboardButton(text=BTN_AI), KeyboardButton(text=BTN_PHOTO)],
+            [KeyboardButton(text=BTN_APP)],
         ],
         resize_keyboard=True,
     )
